@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-
+  builder: "vite",
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
-    '@nuxt/test-utils'
-  ]
+    '@nuxt/test-utils',
+    "@unocss/nuxt"
+  ],
 })
