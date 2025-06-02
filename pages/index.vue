@@ -8,7 +8,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="mx-auto min-h-screen max-w-3xl">
+  <div class="mx-auto min-h-screen prose prose-md">
     <ContentRenderer v-if="content" :value="content" />
     <div v-else>Content not found</div>
   </div>
