@@ -12,11 +12,18 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxt/scripts",
-    "@nuxt/ui",
+    // "@nuxt/ui",
     "@nuxt/test-utils",
+    "@nuxt/ui-pro",
   ],
   css: ["~/assets/css/main.css"],
   vite: {
     plugins: [tailwindcss()],
   },
+  postcss:{
+    plugins:{
+      'postcss-nested':{},
+      'postcss-custom-media':{},
+    }
+  }
 });
