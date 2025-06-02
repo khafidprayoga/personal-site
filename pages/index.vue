@@ -2,5 +2,7 @@
 </script>
 
 <template>
-  <div class="text-xl">Hello World</div>
+  <main class="md:min-h-screen py-10">
+    <p>Main Content</p>
+  </main>
 </template>
