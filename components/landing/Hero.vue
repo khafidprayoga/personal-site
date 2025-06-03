@@ -21,7 +21,7 @@ const {
         <div class="flex justify-center gap-4">
           <UButton :label="hero.openToWork ? 'Actively Open to Work' : 'Currently Not Open to Work'" color="primary">
           </UButton>
-          <UButton class="bg-green-600 p-2 font-sans" label="Schedule a Meeting" color="primary" :to="'https://linkedin.com/in/'+ social.linkedin" target="_blank"></UButton>
+          <UButton class="bg-green-500 p-2 font-sans" label="Download CV"></UButton>
         </div>
         <p class="text-gray-600 mt-4 text-left">{{ hero.description }}</p>
       </div>

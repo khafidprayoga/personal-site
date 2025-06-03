@@ -26,6 +26,10 @@ export default defineAppConfig({
     description: "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let’s build something powerful—together.",
     openToWork: true,
   },
+  latestArticle:{
+    show: true,
+    limit: 5,
+  },
   social:{
     github: "khafidprayoga",
     linkedin: "khafidprayoga",
