@@ -30,14 +30,14 @@ const links: NavigationMenuItem[] = [
 <template>
   <div>
     <UNavigationMenu 
-    highlight
     color="primary"
     orientation="horizontal"
     :items="links" 
     variant="link"
+    class="w-full nav-menu"
     :ui="{
       link: 'py-1',
-      linkLabel: 'text-lg font-bold',
+      linkLabel: 'text-sm',
       item: 'pr-3',
     }"
     >

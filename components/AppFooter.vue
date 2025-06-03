@@ -3,7 +3,7 @@ const { footer } = useAppConfig()
 </script>
 
 <template>
-  <div class="flex flex-row justify-between text-sm">
+  <div class="flex flex-col md:flex-row justify-between text-sm gap-2">
     <div>
       {{ footer.credits }}
     </div>

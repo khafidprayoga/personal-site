@@ -1,7 +1,24 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "@nuxt/ui";
-/* @plugin "@nuxt/ui-pro"; */
 
-*{
+:root{
+  --font-heading:  "Public Sans", sans-serif;
+  --font-body: "Hint Madurai", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+.nav-menu{
+  font-family: var(--font-heading);
+}
+
+.post-title{
+  font-family: "Cardo", serif;
 }
