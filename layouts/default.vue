@@ -1,12 +1,14 @@
-<script lang="ts">
+<script setup lang="ts">
+const config = useAppConfig()
 </script>
 
 <template>
-    <UContainer class="w-3xl mx-auto flex flex-col py-5 px-5">
-      <AppHeader />
-      <div class="md:min-h-screen py-10">
-        <slot />
-      </div>
-      <AppFooter/>
-    </UContainer>
+  <UContainer class="w-3xl mx-auto flex flex-col py-5 px-5">
+    <AppHeader />
+    <div class="md:min-h-screen my-5">
+      <AppBanner v-if="config.pinnedAnnouncement?.show" class="mb-5"/>
+      <slot />
+    </div>
+    <AppFooter />
+  </UContainer>
 </template>

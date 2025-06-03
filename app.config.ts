@@ -14,7 +14,7 @@ export default defineAppConfig({
     role: "Software Engineer",
   },
   pinnedAnnouncement: {
-    show: false,
+    show: true,
     message: "Just Release a new version of Fixed Thoughts!",
     link: {
       label: "Check it out",
@@ -23,7 +23,7 @@ export default defineAppConfig({
   },
   hero: {
     title: "Hey, i am Khafid👋",
-    description: "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let’s build something powerful — together.",
+    description: "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let’s build something powerful—together.",
     openToWork: true,
   },
   social:{

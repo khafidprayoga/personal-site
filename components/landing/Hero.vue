@@ -8,7 +8,7 @@ const {
 </script>
 
 <template>
-  <main class="container py-5" id="hero">
+  <main class="container" id="hero">
     <section id="hero-content">
       <div class="text-center mb-6">
         <NuxtImg :src="'https://github.com/' + social.github + '.png'" :alt="author.name + ' Avatar'"
