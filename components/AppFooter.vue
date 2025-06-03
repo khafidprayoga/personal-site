@@ -5,7 +5,7 @@ const { footer } = useAppConfig()
 <template>
   <div class="flex flex-col md:flex-row justify-between text-sm gap-2">
     <div>
-      {{ footer.credits }}
+      Copyright &copy; {{ new Date().getFullYear() }}. {{ footer.credits }}
     </div>
 
     <div class="flex flex-row gap-1.5">

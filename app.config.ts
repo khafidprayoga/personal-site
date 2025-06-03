@@ -14,7 +14,7 @@ export default defineAppConfig({
     role: "Software Engineer",
   },
   pinnedAnnouncement: {
-    show: true,
+    show: false,
     message: "Just Release a new version of Fixed Thoughts!",
     link: {
       label: "Check it out",

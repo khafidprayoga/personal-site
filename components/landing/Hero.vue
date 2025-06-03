@@ -31,8 +31,8 @@ const {
   </main>
 </template>
 
-<style>
-span[aria-label="role"] {
+<style scoped>
+h1 {
   font-family: 'Caveat', cursive;
 }
 </style>
