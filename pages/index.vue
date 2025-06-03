@@ -3,7 +3,12 @@ const {
   pinnedAnnouncement,
   author,
   hero,
+  appName,
 } = useAppConfig()
+
+useHead({
+  title: `${appName} / Home`
+})
 </script>
 
 <template>
@@ -27,7 +32,7 @@ const {
         <p>
           JMeter is an open-source tool for load testing and performance monitoring.
         </p>
-        <UButton :to="'/blog/2'" label="Read More" class="font-mono underline"  />
+        <UButton :to="'/blog/2'" label="Read More" class="font-mono underline" />
       </div>
       <div class="flex flex-col gap-1" id="article-item">
         <h3 class="font-bold">How to Build Real-time chat application with Go and React</h3>
@@ -54,4 +59,3 @@ const {
     </div>
   </section>
 </template>
-

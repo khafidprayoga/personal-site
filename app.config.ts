@@ -6,7 +6,7 @@ export default defineAppConfig({
       solid: 'blue',
     }
   },
-  appName: "Fixed Thoughts",
+  appName: "Khafid Prayoga",
   appDescription:
     "Fixed Thoughts is a daily writing about my thoughts and experiences",
   author: {

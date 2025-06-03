@@ -1,5 +1,12 @@
+<script setup lang="ts">
+const { appName } = useAppConfig()
+
+useHead({
+  title: `${appName} / Story`
+})
+</script>
 <template>
   <h1>
-    Thoughts Story
+    Story
   </h1>
 </template>
