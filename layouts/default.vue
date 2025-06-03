@@ -3,9 +3,9 @@ const config = useAppConfig()
 </script>
 
 <template>
-  <UContainer class="w-3xl mx-auto flex flex-col py-5 px-5">
+  <UContainer class="md:w-3xl mx-auto flex flex-col py-5 px-5">
     <AppHeader />
-    <div class="md:min-h-screen my-5">
+    <div class="min-h-screen my-5">
       <AppBanner v-if="config.pinnedAnnouncement?.show" class="mb-5"/>
       <slot />
     </div>
