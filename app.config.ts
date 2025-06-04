@@ -14,18 +14,19 @@ export default defineAppConfig({
     role: "Software Engineer",
   },
   pinnedAnnouncement: {
-    show: false,
-    message: "Just Release a new version of Fixed Thoughts!",
+    show: true,
+    message: "🚧 This project is under active development and has no stable release yet.",
     link: {
-      label: "Check it out",
-      to: "/showcase",
+      label: "",
+      to: "https://github.com/khafidprayoga/fixed",
     },
   },
   hero: {
-    showPicture: false,
+    showPicture: true,
     title: "Hey, i am Khafid👋",
     description: "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let’s build something powerful—together.",
     openToWork: true,
+    resumeUrl: "https://drive.google.com/file/d/1ophAiqRIoqsn-0BIx8TIiI1Kf5fvS-Bm/view?usp=sharing"
   },
   latestArticle:{
     show: true,
