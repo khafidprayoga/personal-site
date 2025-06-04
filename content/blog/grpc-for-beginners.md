@@ -3,7 +3,6 @@ title: gRPC for Beginner
 date: 2023-04-02
 ---
 
-# Belajar Membuat Service gRPC
 
 RPC (Remote Prodcedur Call) merupakan sebuah protokol komunikasi pada komputer yang dapat digunakan untuk menghubungkan fungsi-fungsi pada pemrograman dengan bahasa yang berbeda, maupun komputer yang berbeda lokasi atau terdistribusi.
 
