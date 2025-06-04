@@ -24,9 +24,9 @@ useHead({
     <section v-if="post" class="my-1 text-xs">
       <p>Published at: {{  new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</p>
     </section>
-    <article v-if="post">
+    <article v-if="post" class="prose prose-lg">
       <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
-      <ContentRenderer :value="post" class="prose prose-lg" />
+      <ContentRenderer :value="post" />
     </article>
     <div v-else class="text-center">
       <p>Post Not Found</p>

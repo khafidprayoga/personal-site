@@ -49,7 +49,7 @@ useHead({
             <h2 class="text-md font-bold">
               {{ item.title }}
             </h2>
-            <p class="text-sm">
+            <p class="text-sm font-medium">
               {{ item.summary }}
             </p>
             <NuxtLink :to="`${item.path}`" aria-label="Read more" class="text-sm underline font-mono">

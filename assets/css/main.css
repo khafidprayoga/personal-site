@@ -45,3 +45,31 @@ h6 {
 a[aria-current="page"] {
   @apply underline decoration-1 underline-offset-6;
 }
+
+.prose {
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Raleway", sans-serif;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote {
+    --font-body: "Hint Madurai", sans-serif;
+  }
+
+  code {
+    font-family: var(--font-mono);
+  }
+
+  /* You can also override other Typography properties here */
+  /* --tw-prose-headings-color: #333; */
+  /* --tw-prose-body-color: #555; */
+}
