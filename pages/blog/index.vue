@@ -3,12 +3,12 @@ const { appName } = useAppConfig()
 
 const { data } = await useAsyncData('blog-posts', () => {
   return queryCollection('content')
-    .where('path', 'LIKE', '/blog/%')
     .order('date', 'DESC')
     .all()
 })
 
 type BlogPost = {
+  id: string
   title: string
   date: string
   summary: string
@@ -20,6 +20,7 @@ const articles = computed(() => {
   if (!data.value) return []
 
   return data.value.map((item) => ({
+    id: item.id,
     title: item.title,
     date: item.date,
     year: new Date(item.date).getFullYear(),
@@ -45,7 +46,7 @@ useHead({
           {{ item.year }}:
         </h2>
         <ol class="flex flex-col">
-          <li class="mt-3">
+          <li class="mt-3" :key="item.id">
             <h2 class="text-md font-bold">
               {{ item.title }}
             </h2>

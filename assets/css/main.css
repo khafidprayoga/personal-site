@@ -62,6 +62,7 @@ a[aria-current="page"] {
   ul,
   ol,
   blockquote {
+    @apply font-extralight;
     --font-body: "Hint Madurai", sans-serif;
   }
 

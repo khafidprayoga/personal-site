@@ -10,7 +10,7 @@ useHead({
 </script>
 
 <template>
-  <LandingHero class="mb-10" />
+  <LandingHero class="mb-10" :avatar-size="128" :show-role="true" :show-status="true"/>
   <LandingLatestArticle/>
 </template>
 
