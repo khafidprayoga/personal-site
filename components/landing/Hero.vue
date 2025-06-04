@@ -25,7 +25,7 @@ const imgUrl = computed(() => {
           </span>
         </h1>
         <div class="flex justify-center gap-4">
-          <UButton :label="hero.openToWork ? 'Actively Open to Work' : 'Currently Not Open to Work'" color="primary"/>
+          <UButton :label="hero.openToWork ? 'Actively Open to Work' : 'Actively Contributing in Open Source'" color="primary"/>
           <UButton class="bg-green-500 p-2 font-sans" label="Download CV"/>
         </div>
         <p class="text-gray-600 mt-4 text-left">{{ hero.description }}</p>

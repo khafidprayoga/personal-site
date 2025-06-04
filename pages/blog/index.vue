@@ -1,120 +1,82 @@
 <script setup lang="ts">
 const { appName } = useAppConfig()
 
+const { data } = await useAsyncData('blog-posts', () => {
+  return queryCollection('content')
+    .where('path', 'LIKE', '/blog/%')
+    .order('date', 'DESC')
+    .all()
+})
+
+type BlogPost = {
+  title: string
+  date: string
+  summary: string
+  year: number
+  path: string
+}
+
+const articles = computed(() => {
+  if (!data.value) return []
+
+  return data.value.map((item) => ({
+    title: item.title,
+    date: item.date,
+    year: new Date(item.date).getFullYear(),
+    summary: item.description,
+    path: item.path,
+  })) as BlogPost[]
+})
+
 useHead({
   title: `${appName} / Blog Posts`
 })
+
 </script>
 <template>
-  <h1 class="text-xl font-bold">
-    Blog Posts
-  </h1>
+  <UContainer>
+    <h1 class="text-xl font-bold">
+      Blog Posts
+    </h1>
 
-  <div class="flex flex-col gap-1">
-    <h2 class="mt-3">2025:</h2>
-    <UContainer class=" mx-auto flex flex-col my-5">
-      <ol class="flex flex-col gap-1">
-        <li>
-          <h2 class="text-lg ">
-            Building Modern Microservices with gRPC
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg">
-            Kafka Streams: A Comprehensive Guide
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            OLAP vs OLTP: Understanding the Differences
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            How to Build Real-time chat application with Go and React
-          </h2>
-        </li>
-      </ol>
-      <ol class="flex flex-col gap-1">
-        <li>
-          <h2 class="text-lg ">
-            Building Modern Microservices with gRPC
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg">
-            Kafka Streams: A Comprehensive Guide
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            OLAP vs OLTP: Understanding the Differences
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            How to Build Real-time chat application with Go and React
-          </h2>
-        </li>
-      </ol>
-      <ol class="flex flex-col gap-1">
-        <li>
-          <h2 class="text-lg ">
-            Building Modern Microservices with gRPC
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg">
-            Kafka Streams: A Comprehensive Guide
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            OLAP vs OLTP: Understanding the Differences
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            How to Build Real-time chat application with Go and React
-          </h2>
-        </li>
-      </ol>
-   
-    </UContainer>
-
-    <h2 class="mt-3">2024:</h2>
-    <UContainer class=" mx-auto flex flex-col my-5">
-      <ol class="flex flex-col gap-1">
-        <li>
-          <h2 class="text-lg ">
-            Rust Programming Language: A Comprehensive Guide, From Zero to Hero
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg">
-            Rustbuild vs Vitebuild: Which is Better?
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            Java8: Object Oriented Programming
-          </h2>
-        </li>
-        <li>
-          <h2 class="text-lg ">
-            PostgreSQL: The Definitive Guide
-          </h2>
-        </li>
-      </ol>
-    </UContainer>
-
-  </div>
-
-
+    <div class="flex flex-col">
+      <template v-for="(item, index) in articles" :key="index">
+        <h2 v-if="index === 0 || item.year !== articles[index - 1].year" class="mt-3 text-lg font-bold">
+          {{ item.year }}:
+        </h2>
+        <ol class="flex flex-col">
+          <li class="mt-3">
+            <h2 class="text-md font-bold">
+              {{ item.title }}
+            </h2>
+            <p class="text-sm">
+              {{ item.summary }}
+            </p>
+            <NuxtLink :to="`${item.path}`" aria-label="Read more" class="text-sm underline font-mono">
+              Read more...
+            </NuxtLink>
+          </li>
+        </ol>
+      </template>
+    </div>
+  </UContainer>
 </template>
 
 <style scoped>
+@reference 'tailwindcss';
+
 ol {
-  list-style-type: disc;
+  list-style-type: none;
+  position: relative;
+  padding-left: 0;
+}
+
+ol li {
+  position: relative;
+  padding-left: 2rem;
+}
+
+ol li::before {
+  @apply content-['👉'] absolute left-0;
 }
 </style>

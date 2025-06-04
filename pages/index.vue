@@ -1,9 +1,6 @@
 <script setup lang="ts">
 
 const {
-  pinnedAnnouncement,
-  author,
-  hero,
   appName,
 } = useAppConfig()
 
@@ -16,3 +13,11 @@ useHead({
   <LandingHero class="mb-10" />
   <LandingLatestArticle/>
 </template>
+
+<style scoped>
+@reference 'tailwindcss';
+
+p {
+  font-family: var(--font-body);
+}
+</style>
