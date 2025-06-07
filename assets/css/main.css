@@ -70,6 +70,17 @@ a[aria-current="page"] {
     font-family: var(--font-mono);
   }
 
+  p:has(img.figure) {
+    @apply pb-0 mb-0;
+  }
+
+  img.figure {
+    @apply mx-auto pb-0 mb-0;
+  }
+
+  p:has(img.figure)+p {
+    @apply font-mono text-xs text-gray-500 text-center;
+  }
   /* You can also override other Typography properties here */
   /* --tw-prose-headings-color: #333; */
   /* --tw-prose-body-color: #555; */

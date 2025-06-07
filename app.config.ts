@@ -1,4 +1,5 @@
 export default defineAppConfig({
+  appHostname: "example.local",
   appName: "Khafid Prayoga",
   appDescription:
     "Fixed Thoughts is a daily writing about my thoughts and experiences",
@@ -85,6 +86,7 @@ export default defineAppConfig({
           start: "June 2024",
           end: "March 2025",
         },
+        companyUrl: "https://gameskii.com",
         description:
           "I built and managed backend services aligned with business needs, designed database structures using PostgreSQL, and rewrote Laravel-Lumen services to Golang for improved performance. I also deployed new features to Ubuntu servers, maintained backend services for both Android and iOS mobile clients, and actively contributed to team code quality through GitLab Merge Request reviews. Furthermore, I planned project timelines with Odoo timesheets and documented technical requirements on Notion.",
       },
@@ -95,6 +97,7 @@ export default defineAppConfig({
           start: "April 2022",
           end: "April 2024",
         },
+        companyUrl: "https://smartlink.id",
         description:
           "I optimized data migration processes from MySQL to Elasticsearch, developed a WhatsApp Chatbot for SnapBridge Gateway, and streamlined API documentation using OpenAPI. I also designed and maintained a secure, cloud-based Document Management System, implemented robust backend functionalities with frameworks like Express, Gin, and Fiber, and collaborated effectively with frontend teams to ensure seamless product integration.",
       },

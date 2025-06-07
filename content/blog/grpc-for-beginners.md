@@ -10,7 +10,7 @@ Format data yang dikirim secara umum menggunakan json (JSON-RPC) atau bisa juga 
 
 Bayangkan gambar berikut ini ada beberapa services yang saling berkaitan untuk mendukung keperluan bisnis digital:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754252974/860afdff-ab81-4274-9e98-a0606738bf80.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754252974/860afdff-ab81-4274-9e98-a0606738bf80.png){.figure}
 
 Microservice architecture with RPC
 
@@ -24,7 +24,7 @@ Lalu pada gambar tersebut terdapat gateway untuk mengakses service tersebut, dal
 
 Apabila anda sebagai *developer* masih bingung dengan konsep tersebut coba perhatikan gambar berikut ini:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754254916/1263ce14-f20d-49e2-a56d-57e7a4d7f444.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754254916/1263ce14-f20d-49e2-a56d-57e7a4d7f444.png){.figure}
 
 Greet function
 
@@ -291,7 +291,7 @@ Pada intinya file `buf.gen.yaml` merupakan file konfigurasi build untuk men-gene
 
 Setelah semuanya sudah siap saatnya kita mulai berinteraksi dengan build script milik Buf, silahkan pindah ke working space directory `student-svc` . Kemudian jalankan perintah `buf generate proto/` yang memilik maksud untuk membuild file `.proto` pada direktori `proto/` menjadi client/server mocks dan stub interface dalam bahasa Golang dan Typescript, hasilnya akan menjadi seperti berikut ini:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754256677/802e0b08-ca24-4749-ab00-84959aa26f08.png )
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754256677/802e0b08-ca24-4749-ab00-84959aa26f08.png ){.figure}
 
 Build result from student.proto
 
@@ -356,7 +356,9 @@ yang memiliki maksud untuk melakukan pengecekan branch sekarang apakah merusak f
 
 Remote repository dapat memperkecil ukuran build artifact, pada intinya folder `gen/` dan `client/gen` yang ada di local akan dipublishkan ke repository Buf Registry, dan selain itu file `.proto` juga akan otomatis berada disana, menariknya anda juga bisa menulis dokumentasi service anda dengan file `markdown`.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754258770/d72a1bd8-52af-4a02-9d6a-ac7f2d7aa3ce.png)
+![](https://cdn.hashnode.com/res/hashnode/image/upload/v1740754258770/d72a1bd8-52af-4a02-9d6a-ac7f2d7aa3ce.png){.figure}
+
+Example Buf repository registry 
 
 Saya rasa cukup sampai disini, karena tulisan ini sudah terlalu panjang silahkan explore sendiri jika tertarik dengan build system yang lebih modern (Buf.Build), dan jangan lupa juga untuk mencoba menggunakan Connect Protocol. Untuk implementasi server gRPCnya saya menggunakan in-memory database dengan *map\\[string\\]any*, dan pada sisi client implementasinya saya melakukan rpc call method GetStudentDetail.
 

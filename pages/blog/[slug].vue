@@ -39,7 +39,7 @@ useHead({
       <ContentRenderer :value="post" />
     </article>
 
-    <div v-if="!post && !pending && !error" class="text-center w-full h-[300px] border-b-2 border-gray-200 rounded-sm mb-5">
+    <div v-if="!post && !pending && !error" class="text-center w-full h-[300px] pt-10 border-b-2 border-gray-200 rounded-sm mb-5">
       <h1 class="mx-5 my-2 py-2 text-2xl font-bold">Post Not Found</h1>
     </div>
     <section id="about-me" class="flex flex-row gap-4  mx-5 my-2">
