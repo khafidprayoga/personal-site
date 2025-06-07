@@ -21,14 +21,14 @@ useHead({
 </script>
 
 <template>
-  <div class="container mx-auto py-8 relative">
-    <div v-if="pending">
+  <div class="container mx-auto pb-8 overflow-x-hidden">
+    <div v-if="pending" class="text-center w-full h-[300px] border-b-2 border-gray-200 rounded-sm mb-5">
       <p>Pulling content... hang tight and chill with a cup of coffee</p>
     </div>
     <div v-if="error">
       <p>Failed pulling content with reason {{ error.message }}</p>
     </div>
-    <article v-if="post && !pending && !error" :key="post.id" class="prose prose-lg mx-5 my-2 px-2 rounded-sm border-b-2 border-gray-200 mb-5">
+    <article v-if="post && !pending && !error" :key="post.id" class="prose prose-sm  md:prose-lg md:mx-5 my-2 px-2 rounded-sm border-b-2 border-gray-200 mb-5">
       <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
       <section class="my-1 text-xs">
         <p>Published at: {{ new Date(post.date).toLocaleDateString('en-US', {
