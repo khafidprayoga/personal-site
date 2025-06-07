@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from "@nuxt/ui"
 
+const { appName } = useAppConfig()
 
 const links: NavigationMenuItem[] = [
   {
@@ -29,6 +30,7 @@ const links: NavigationMenuItem[] = [
 
 <template>
   <div>
+    <h1 class="font-stretch-condensed uppercase text-center text-xl md:text-3xl">{{  appName }}</h1>
     <UNavigationMenu color="primary" orientation="horizontal" :items="links" variant="link" class="w-full nav-menu" :ui="{
       link: 'py-1',
       linkLabel: 'text-sm',
