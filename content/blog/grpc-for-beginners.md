@@ -125,7 +125,7 @@ Hal tersebut mempermudahkan ketika service yang akan kita implementasikan, salin
 
 Kemudian silahkan buat file pada student proto dengan perintah berikut `touch proto/student/v2/student.proto` . Setelah berhasil membuat file tersebut, silahkan salin kode .proto dibawah ini:
 
-```go
+```proto
 syntax = "proto3";
 
 package student.v2;
@@ -352,7 +352,7 @@ yang memiliki maksud untuk melakukan pengecekan branch sekarang apakah merusak f
 
 > Untuk versi implementasi dengan protocol tersebut saya simpan pada branch `connect-go-examples`
 
-#### Buf Schema Registry
+### Buf Schema Registry
 
 Remote repository dapat memperkecil ukuran build artifact, pada intinya folder `gen/` dan `client/gen` yang ada di local akan dipublishkan ke repository Buf Registry, dan selain itu file `.proto` juga akan otomatis berada disana, menariknya anda juga bisa menulis dokumentasi service anda dengan file `markdown`.
 

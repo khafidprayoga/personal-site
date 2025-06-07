@@ -15,6 +15,9 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/test-utils",
   ],
+  ui: {
+    colorMode: false,
+  },
   css: ["~/assets/css/main.css"],
   vite: {
     plugins: [
@@ -64,5 +67,15 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: "cloudflare-pages",
+  },
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: "github-dark-high-contrast",
+          langs: ["proto", "go", "json", "yaml", "toml", "bash", "sh", "js", "ts", "html", "css", "sql", "md", "markdown"],
+        },
+      },
+    },
   },
 });

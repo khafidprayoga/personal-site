@@ -9,6 +9,6 @@ export default defineContentConfig({
         title: z.string(),
         date: z.string().or(z.date()),
       })
-    })
+    }),
   }
 })
