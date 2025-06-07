@@ -9,15 +9,15 @@ const { data: articles } = await useAsyncData('articles', () => {
 
 <template>
   <section id="latest-article" class="mb-10">
-    <div class="flex justify-between items-center">
-      <h2 class="text-2xl font-bold capitalize">Latest Article</h2>
+    <div>
+      <h2 class="text-2xl font-bold capitalize  border-b-4 border-gray-200">Latest Article</h2>
     </div>
     <div id="blog" class="flex flex-col gap-5 my-3" >
       <template v-if="articles">
         <div v-for="article in articles" :key="article.id" class="flex flex-col gap-1">
           <h3 class="text-md font-bold">{{ article.title }}</h3>
           <p class="text-sm text-gray-600 font-medium">{{ article.description }}</p>
-          <NuxtLink :to="article.path" class="text-xs font-mono underline">Read More...</NuxtLink>
+          <UButton :to="article.path" class="text-xs font-mono underline">Read More...</UButton>
         </div>
       </template>
     </div>

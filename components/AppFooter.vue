@@ -14,10 +14,8 @@ const { footer } = useAppConfig()
           <UButton 
           v-bind="{
             size: 'xl',
-            color: 'neutral',
-            variant: 'ghost',
             ...link,
-          }" />
+          }" :no-rel="true"/>
         </UTooltip>
 
       </template>

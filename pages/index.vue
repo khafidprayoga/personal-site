@@ -2,6 +2,8 @@
 
 const {
   appName,
+  latestArticle,
+  workExperience,
 } = useAppConfig()
 
 useHead({
@@ -10,8 +12,11 @@ useHead({
 </script>
 
 <template>
+  <div>
   <LandingHero class="mb-10" :avatar-size="128" :show-role="true" :show-status="true"/>
-  <LandingLatestArticle/>
+  <LandingWorkExperience v-if="workExperience.show"/>
+  <LandingLatestArticle v-if="latestArticle.show"/>
+</div>
 </template>
 
 <style scoped>
