@@ -13,8 +13,10 @@ const props = withDefaults(defineProps<{
   showRole?: boolean
   showStatus?: boolean
   avatarSize?: number
+  showStacks?: boolean
 }>(), {
   avatarSize: 200,
+  showStacks: true,
 })
 
 </script>
@@ -34,11 +36,19 @@ const props = withDefaults(defineProps<{
         <div v-if="showStatus" class="flex justify-center gap-4">
           <UButton :label="hero.openToWork ? 'Actively Open to Work' : 'Actively Contributing in Open Source'"
             color="primary" />
-          <UButton class="bg-green-500 p-2 font-sans" :to="hero.resumeUrl" label="Download CV" :target="'_blank'" />
+          <UButton class="bg-zinc-500 hover:bg-zinc-600 p-2 font-sans text-white" :to="hero.resumeUrl" label="Download CV" :target="'_blank'" />
         </div>
         <p class="text-gray-600 mt-4 text-left">{{ hero.description }}</p>
       </div>
     </section>
+    <template v-if="hero?.stacks && showStacks">
+      <div id="hero-stacks" class="grid grid-cols-3 gap-1.5 mx-auto justify-center md:w-[500px]">
+        <span v-for="(tech, index) in hero?.stacks" :key="index" :name="tech.icon" class="hover:opacity-50 flex flex-row gap-1.5 items-center justify-center">
+          <UIcon :name="tech.icon" class="text-xl md:text-3xl " />
+          <span class="text-xs md:text-sm font-medium">{{ tech.name }}</span>
+        </span>
+      </div>
+    </template>
   </main>
 </template>
 

@@ -19,10 +19,61 @@ export default defineAppConfig({
     showPicture: true,
     title: "Hey, i am Khafid👋",
     description:
-      "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let’s build something powerful—together.",
+      "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let's build something powerful—together.",
     openToWork: true,
     resumeUrl:
       "https://drive.google.com/file/d/1ophAiqRIoqsn-0BIx8TIiI1Kf5fvS-Bm/view?usp=sharing",
+    stacks: [
+      {
+        name: "Go",
+        icon: "i-simple-icons-go"
+      },
+      {
+        name: "Nuxt.js",
+        icon: "i-simple-icons-nuxtdotjs"
+      },
+      {
+        name: "SQLite",
+        icon: "i-simple-icons-sqlite"
+      },
+      {
+        name: "MySQL",
+        icon: "i-simple-icons-mysql"
+      },
+      {
+        name: "PostgreSQL",
+        icon: "i-simple-icons-postgresql"
+      },
+      {
+        name: "Node.js",
+        icon: "i-simple-icons-nodedotjs"
+      },
+      {
+        name: "Laravel",
+        icon: "i-simple-icons-laravel"
+      },
+      {
+        name: "Docker",
+        icon: "i-simple-icons-docker"
+      },
+      {
+        name: "Elasticsearch",
+        icon: "i-simple-icons-elasticsearch"
+      },
+      {
+        name: "Cloudflare",
+        icon: "i-simple-icons-cloudflare"
+      },
+
+      {
+        name: "Google Cloud",
+        icon: "i-simple-icons-googlecloud"
+      },
+      {
+        name: "AWS",
+        icon: "i-simple-icons-amazonaws"
+      },
+    ]
   },
   workExperience: {
     show: true,

@@ -28,7 +28,7 @@ useHead({
     <div v-if="error">
       <p>Failed pulling content with reason {{ error.message }}</p>
     </div>
-    <article v-if="post && !pending && !error" :key="post.id" class="prose prose-sm  md:prose-lg md:mx-5 my-2 px-2 rounded-sm border-b-2 border-gray-200 mb-5">
+    <article v-if="post && !pending && !error" :key="post.id" class="prose prose-md  md:prose-lg md:mx-5 my-2 px-2 rounded-sm border-b-2 border-gray-200 mb-5">
       <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
       <section class="my-1 text-xs">
         <p>Published at: {{ new Date(post.date).toLocaleDateString('en-US', {
@@ -43,7 +43,7 @@ useHead({
       <h1 class="mx-5 my-2 py-2 text-2xl font-bold">Post Not Found</h1>
     </div>
     <section id="about-me" class="flex flex-row gap-4  mx-5 my-2">
-      <LandingHero class="max-w-xl mx-auto" :show-role="false" :show-status="false" :avatar-size="72" />
+      <LandingHero class="max-w-xl mx-auto" :show-role="false" :show-status="false" :avatar-size="72" :show-stacks="false" />
     </section>
   </div>
 </template>
