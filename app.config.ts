@@ -27,52 +27,52 @@ export default defineAppConfig({
     stacks: [
       {
         name: "Go",
-        icon: "i-simple-icons-go"
+        icon: "i-devicon-go"
       },
       {
         name: "Nuxt.js",
-        icon: "i-simple-icons-nuxtdotjs"
+        icon: "i-devicon-nuxtjs"
       },
       {
         name: "SQLite",
-        icon: "i-simple-icons-sqlite"
+        icon: "i-devicon-sqlite"
       },
       {
         name: "MySQL",
-        icon: "i-simple-icons-mysql"
+        icon: "i-devicon-mysql"
       },
       {
         name: "PostgreSQL",
-        icon: "i-simple-icons-postgresql"
+        icon: "i-devicon-postgresql"
       },
       {
         name: "Node.js",
-        icon: "i-simple-icons-nodedotjs"
+        icon: "i-devicon-nodejs"
       },
       {
         name: "Laravel",
-        icon: "i-simple-icons-laravel"
+        icon: "i-devicon-laravel"
       },
       {
         name: "Docker",
-        icon: "i-simple-icons-docker"
+        icon: "i-devicon-docker"
       },
       {
         name: "Elasticsearch",
-        icon: "i-simple-icons-elasticsearch"
+        icon: "i-devicon-elasticsearch"
       },
       {
         name: "Cloudflare",
-        icon: "i-simple-icons-cloudflare"
+        icon: "i-devicon-cloudflare"
       },
 
       {
         name: "Google Cloud",
-        icon: "i-simple-icons-googlecloud"
+        icon: "i-devicon-googlecloud"
       },
       {
-        name: "AWS",
-        icon: "i-simple-icons-amazonaws"
+        name: "AWS Cloud",
+        icon: "i-devicon-amazonwebservices-wordmark"
       },
     ]
   },
