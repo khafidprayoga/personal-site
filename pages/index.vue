@@ -13,7 +13,7 @@ useHead({
 
 <template>
   <div>
-  <LandingHero class="mb-10" :avatar-size="128" :show-role="true" :show-status="true"/>
+  <LandingHero class="mb-10" :avatar-size="150" :show-role="true" :show-status="true"/>
   <LandingWorkExperience v-if="workExperience.show"/>
   <LandingLatestArticle v-if="latestArticle.show"/>
 </div>

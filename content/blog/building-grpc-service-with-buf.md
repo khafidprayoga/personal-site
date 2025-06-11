@@ -1,0 +1,350 @@
+---
+title: "Building Modern gRPC Service with Buf.Build"
+subtitle: "Building Modern gRPC service: A Guide to Interacting with Protocol Buffers easily with a modern build system called Buf"
+date: 2023-04-05
+canonicalURL: "https://medium.com/@khafidprayoga/building-modern-grpc-service-with-buf-build-5c1b5c0bb4e6"
+bannerURL: "https://ik.imagekit.io/zq4s7yjq3/blog/image/1_TzuziWPYQmTqMjHc0NpY1Q.png?tr=w-1280,h-720,fo-center,f-webp,q-50,c-maintain-ratio"
+published: true
+---
+
+RPC (Remote Procedure Call) is a communication protocol on computers that can be used to connect functions in programming with different languages and computers in other locations or distributed systems.
+
+The format of the data sent generally uses JSON (JSON-RPC), or it can also be XML (XML-RPC), an example of a protocol that uses XML format is SOAP (Simple Object Access Protocol). In the material we speak this time, we will use gRPC (gprc remote procedure call), whose data exchange format uses Protobuf. It can also be JSON (by using grpc-gateway). gRPC is a project released open-source by Google in August 2016.
+
+Imagine the following picture, several services are linked together to support digital business needs:
+
+![Figure: example of microservice arcitecure with RPC](https://ik.imagekit.io/zq4s7yjq3/blog/image/1_zWWu7noOBcgnE7j3yqCBig.png?tr=fo-center,f-webp,q-50,c-maintain-ratio){ loading="lazy" format="webp" class="w-full h-auto object-cover  shadow-m figure" width="1080" height="720"}
+
+Microservice architecture with RPC
+
+The benefits obtained when the three services (auth, invoice, payment) are separate from each other are that when a service fails to operate, we will immediately fix the problematic service. The debugging and bug fixing will be easier because each code in a separate service is not merged into one.
+
+For example, when the payment service has a problem, the company will replace the Payment Gateway. Then the other services will not be affected because we already have a data exchange interface format (message) that is already suitable between services. Each service is standalone and separate, but the service groups are linked to support business operations.
+
+Then in the picture, there is a gateway to access the service; in technical terms, it is more commonly called API Gateway. Its job is to manage routing to the internal services needed by the client, analogous to a *reverse proxy* whose function is also to expose internal services accessed from outside the computer network.
+
+If you, as a developer, are still confused by the concept, try looking at the following image:
+
+![Figure: example shared method between programming languages](https://ik.imagekit.io/zq4s7yjq3/blog/image/0_KHRwXv6wRpOMbYge.png?tr=fo-center,f-webp,q-50,c-maintain-ratio){ loading="lazy" format="webp" class="w-full h-auto object-cover  shadow-m figure" width="1080" height="720"}
+
+A greet function call in different languages
+
+For example, I have a `Greet()`Function or Method is written using the Golang language, which is simple and powerful. Then the client using Typescript language needs the process that automatically requires access to the source code we wrote using Golang.
+
+To make the request/response, we use gRPC, whose data exchange format uses Protobuf so that it can be connected between client-server. Through gRPC and Protobuf, we will get source code stubs and mocks created by the *protoc* compiler.
+
+To make it easier to understand gRPC, I ensure you already understand the language with static types because it will facilitate our learning process. The main feature is *Typesafe*, so errors will be handled by the compiler, not in the runtime program when it is running.
+
+There are also several components used to run the gRPC service operation as follows:
+
+## Service Definition
+
+First, define how the service will operate using the IDL (Interface Definition Language) provided by Protobuf. In general, you need to write: the name of the service, the format of the request/response data model, how to communicate, and some other configurations, such as importing packages and naming packages in the target language that will be used.
+
+After all message components have been written, you will compile the .proto file to the target programming language used using *protoc*. However, this article will indirectly use *protoc* to build the generated file from .proto.
+
+By using Buf.build, we only need to provide the configuration in the YAML file. It automatically generates a *protoc* command to make the work faster and more efficient.
+
+### Message Type (Asynchronous/Synchronous)
+
+The asynchronous communication model in gRPC has the term Streaming Data, while the synchronous communication model has Unary Call.   
+Essentially the asynchronous process will not block the main thread to continue the following process; for example, in Golang, there is the concept of `goroutine`, and in Javascript, there is the concept `Promise`.
+
+> Streaming data is data that is continuously generated by different sources. Such data should be processed incrementally using stream processing techniques without access to all the data. In addition, it should be considered that concept drift may happen in the data, meaning that the stream's properties may change over time.  
+> ~ Streaming Data — Wikipedia
+
+In addition, communication between client-servers in gRPC can use one direction or simultaneously (bidirectional). In the gRPC communication model, there is also a standard status code similar to HTTP; for example, for a 200 OK status code in gRPC, it will be 0 OK; for more details, you can see it here.
+
+We will build a service called **Student Service** to store student data in a college. The author will choose Typescript as the client in gRPC and write the service business logic in Golang. But in practice, when implementing gRPC services, you are free to use any language as long as gRPC supports it. Let’s design how the service system works.
+
+This section will focus on writing the client-server communication model interface in a .proto file, which contains definitions and communication schemes to be implemented in the student service. Before proceeding too far, prepare some prerequisite tools below to start following this article:
+
+1. Go v1.19.x
+2. Javascript: v18.14.x dan Typescript v4.9.x
+3. Protoc: protoc-gen-go v1.30.0 dan protoc-gen-go-grpc 1.3.0
+4. Buf Build: v1.15.1
+5. Git: v2.38.1
+
+First, you must install Golang; for more details, read hereand use v1.19.x so that no errors occur when running the source code later. If you have successfully installed Golang, please run the `go version` command to check your installation process. After that, run the command below to install the *protoc* and *buf* tools using Go Mod.
+
+```bash
+# Installing Buf CLI for .proto builders  
+go install github.com/bufbuild/buf/cmd/buf@1.15.1  
+  
+
+```
+
+To make it easier to install Node.js, you can use NVM (Node Version Manager); please read here. Then you need to install the Typescript compiler globally with npm; please use the following command:
+
+```bash
+npm install --global  typescript@v4.9.x ts-node
+```
+
+Then run the `tsc --version`command to ensure the Typescript compiler is installed globally.
+
+> Note: you can see all the source code in full on my GitHub repository: https://github.com/khafidprayoga/student-svc. In this article, just follow the flow; if something is unclear, please clone the repository as a guide.
+
+This section will focus on writing the message format defined in the .proto file. Before we write our services, please init a new module on Golang, and create a folder as below:
+
+```sh
+proto/  
+├── buf.yaml  
+└── student  
+    └── v2  
+        └── student.proto  
+  
+2 directories, 2 files
+```
+
+```bash
+# create a new working directory  
+mkdir student-svc  
+  
+# move directory  
+cd student-svc  
+  
+# init go module  
+go mod init github.com/khafidprayoga/student-svc
+
+```
+
+The directory structure above has a main directory with the following format **proto/{service-name}/{proto-message-version}**. This is not a standard from Protobuf but a style guide to make it easier in the future. This makes it easier when the service we will implement is interconnected with other services, as in the first picture above (service Auth, Payment, Invoice). Then please create a file on student proto with the following command `touch proto/student/v2/student.proto`. After successfully creating the file, please copy the .proto code below:
+
+```proto
+syntax = "proto3";  
+  
+package student.v2;  
+  
+import "google/protobuf/timestamp.proto";  
+option  go_package = "github.com/khafidprayoga/student-svc/v2;studentv2";  
+  
+enum StudentNationality{  
+  STUDENT_NATIONALITY_UNSPECIFIED = 0;  
+  STUDENT_NATIONALITY_CITIZEN = 1;  
+  STUDENT_NATIONALITY_FOREIGN = 2;  
+}  
+  
+enum GenderType {  
+  GENDER_TYPE_UNSPECIFIED = 0;  
+  GENDER_TYPE_MALE = 1;  
+  GENDER_TYPE_FEMALE = 2;  
+  GENDER_TYPE_OTHER = 3;  
+}  
+  
+message CreateStudentRequest{  
+  string full_name = 2;  
+  google.protobuf.Timestamp  birth_date = 3;  
+  GenderType gender = 4;  
+  string address = 5;  
+  repeated string hobbies = 6;  
+  StudentNationality nationality = 7;  
+  string email = 8;  
+}  
+  
+message CreateStudentResponse{  
+  string id = 1;  
+  string full_name = 2;  
+  google.protobuf.Timestamp birth_date = 3;  
+  int32 gender = 4;  
+  string address = 5;  
+  repeated string hobbies = 6;  
+  int32 nationality = 7;  
+  string email = 8;  
+}  
+  
+message GetDetailStudentRequest {  
+  string student_id = 1;  
+}  
+  
+message GetDetailStudentResponse{  
+  string id = 1;  
+  string full_name = 2;  
+  google.protobuf.Timestamp birth_date = 3;  
+  int32 gender = 4;  
+  string address = 5;  
+  repeated string hobbies = 6;  
+  int32 nationality = 7;  
+  string email = 8;  
+  google.protobuf.Timestamp created_at = 9;  
+  google.protobuf.Timestamp updated_at = 10;  
+}  
+  
+message GetListStudentRequest{}  
+message GetListStudentResponse{  
+  repeated GetDetailStudentResponse details = 1;  
+}  
+  
+message DeleteStudentRequest {  
+  string student_id = 1;  
+}  
+  
+message DeleteStudentResponse{  
+  string message = 1;  
+}  
+  
+service StudentService{  
+  rpc CreateStudent(CreateStudentRequest) returns (CreateStudentResponse);  
+  rpc GetDetailStudent(GetDetailStudentRequest) returns (GetDetailStudentResponse);  
+  rpc DeleteStudent(DeleteStudentRequest) returns (DeleteStudentResponse);  
+  rpc GetListStudent(GetListStudentRequest) returns (GetListStudentResponse);  
+}
+```
+
+The code contains the next:
+
+* In the code, we define the message format with proto version 3, which is more secure than proto version 2.
+* The package name of the proto file `student.v2`
+* Import dependencies from Google’s proto file, `Timestamp.proto`which will be used to format `time.Time`in the Golang package into a standard timestamp format from Google.
+* Option from the build language target, Golang, contains the name of the module we initialized earlier; and the name of the package that will be generated later, *studentv2*.
+* Enum contains `Gender` `Nationality`Constants.
+* Request/Response Message is used for data exchange format later between client-server.
+* Finally, the name of our service and the methods the client will use.
+
+> For a better understanding of the syntax of Protocol Buffers please visit the official documentation:
+
+> Language Guide (proto 3): https://protobuf.dev/programming-guides/proto3/
+
+Next, please create a `buf.yaml`file with the following command `touch proto/buf.yaml`. Please copy the following code and save it.
+
+```yaml
+version: v1  
+name: buf.build/khafidprayoga/student-svc  
+deps:  
+  - buf.build/googleapis/googleapis  
+breaking:  
+  use:  
+    - FILE  
+lint:  
+  use:  
+    - DEFAULT
+```
+
+The code contains the following:
+
+* `version` Which is the build interface version of Buf.Build system
+* *name* Which you can later use to publish proto-generated packages to a remote repository called Buf Schema Registry; the concept is similar to Docker Hub.
+* `deps` dependencies on the proto file; for example, in the proto file, there is code that imports Google’s `timestamp.proto`package
+* `breaking` To check when there are changes that break the API that has been circulating. For example, in the `CreateStudent`request, there is a variable `full_name`with the typed string that uses tag number 2. and one day, you suddenly use tag number 2 with another property, for example, `first_name`.
+* `lint` It contains the buf linter configuration, which will check our proto code. For example, your variable naming `f`will be instructed to change it to *snake-case*.
+
+> The buf.yaml file defines a module, and is placed at the root of the Protobuf source files it defines. The placement of the buf.yaml configuration tells buf where to search for .proto files, and how to handle imports.
+
+> This file contains lint and breaking change detection rules, and if applicable, the name of your module and a list of dependencies. https://buf.build/docs/configuration/v1/buf-yaml
+
+Finally, please move to the root working directory `student-svc/`, then create a `buf.gen.yaml`file with the following command `touch buf.gen.yaml`, and copy the following code:
+
+```yaml
+version: v1  
+managed:  
+  enabled: true  
+  go_package_prefix:  
+    default: github.com/khafidprayoga/student-svc/gen  
+    except:  
+      - buf.build/googleapis/googleapis  
+plugins:  
+  - name: go  
+    out: gen  
+    opt: paths=source_relative  
+  - plugin: buf.build/grpc/go  
+    out: gen  
+    opt:  
+      - paths=source_relative  
+  - plugin: grpc-gateway  
+    out: gen  
+    opt:  
+      - paths=source_relative  
+      - generate_unbound_methods=true  
+  - plugin: buf.build/community/timostamm-protobuf-ts  
+    out: client/gen
+```
+
+The `buf.gen.yaml` is a build configuration file to generate client-server stubs and mocks.
+
+> The buf.gen.yaml file defines a local plugin template, and is used by the buf generate command to generate code for the language(s) of your choice.
+
+> https://buf.build/docs/configuration/v1/buf-gen-yaml/
+
+After everything is ready, when we start interacting with Buf’s build script, please move to the working space directory `student-svc`. Then run the following command `buf generate proto/`, which has the intention of building all `.proto`file in the `proto/The directory` Into client/server mocks and stub interfaces in Golang and Typescript languages; the results will be as follows:
+
+![Figure: example of protobuf generated stub and mock interfaces](https://ik.imagekit.io/zq4s7yjq3/blog/image/0_i6MZdvoBksxFQuTW.png?tr=fo-center,f-webp,q-50,c-maintain-ratio){ loading="lazy" format="webp" class="w-full h-auto object-cover  shadow-m figure" width="1080" height="720"}
+
+Build results from students.proto file
+
+The build results will be stored in the following directory:
+
+* `gen/student/v2` For interfaces in the Golang language
+* `client/gen` For interfaces in the Typescript language
+
+After the generated file from the protoc is generated via Buf, you can directly install the dependencies or libraries needed by the client-server in operating the gRPC service.
+
+Please run the `go mod tidy`command in the working directory to install the import library missing in the Golang dependency graph. When finished, it will update the `go.mod`file containing the list of libraries the server needs. There will be a file `go.sum`containing the checksum of the package downloaded via https://pkg.go.dev/.
+
+If there is an error as below:
+
+```sh
+github.com/khafidprayoga/student-svc imports  
+        github.com/khafidprayoga/student-svc/common/config: no matching versions for query "latest"  
+github.com/khafidprayoga/student-svc imports  
+        github.com/khafidprayoga/student-svc/common/constant: no matching versions for query "latest"  
+github.com/khafidprayoga/student-svc imports  
+        github.com/khafidprayoga/student-svc/common/data: no matching versions for query "latest"  
+github.com/khafidprayoga/student-svc imports  
+        github.com/khafidprayoga/student-svc/svc: no matching versions for query "latest
+```
+
+Because the module package on your local computer is not found in the directory, the go module will try to search through the hostname `github.com`. For now, please just look at the implementation on my Github repository https://github.com/khafidprayoga/student-svc.
+
+For the client folder on Typescript, please init a new module with the `tsc — init`Command to generate the tsconfig.js file and run the npm install command to install the libraries the client needs; it will produce package.json and package-lock.json files.
+
+The target Javascript version output in the tsconfig.json configuration file is **ES2020** because there is a feature that will not run if the version is less than this target, called *BigNumber*, which will be used for interaction with Google’s proto Timestamp library.
+
+Besides, Buf can make the interface between the client-server definitive, accessible, and attractive. The tool also has a linter, which can detect errors in the .proto file we write if it does not comply with their standards or style guide.
+
+Now try changing the `full_name`field in the CreateStudentRequest Method to `fullName`. Then run the buf lint proto/ command, and a warning will occur as below:
+
+```sh
+proto/student/v2/student.proto:22:10:Field name "fullName" should be lower_snake_case, such as "full_name".
+```
+
+And last but not least, an interesting feature is:
+
+## Breaking Changes Detection
+
+Buf can detect breaking changes from the message format that we write. For example, tag 2 has been allocated to the `full_name`property, then you change the property to `first_name`, the warning below will occur:
+
+```sh
+<input>:1:1:Previously present file "proto/student/v2/student.proto" was deleted.  
+proto/student/v2/student.proto:22:3:Field "2" with name "first_name" on message "CreateStudentRequest" changed option "json_name" from "fullName" to "firstName".  
+proto/student/v2/student.proto:22:10:Field "2" on message "CreateStudentRequest" changed name from "full_name" to "first_name".
+```
+
+To create the warning and error I ran the following command
+
+```bash
+buf breaking proto/ --against=".git#branch=master"
+```
+
+Which intends to check whether the current branch breaks the message format on the existing branch `master`. It is very useful if your service is already public and many people use it, and the solution is to create a new version.
+
+> I made the student-svc version directly version 2 because in version 1 I implemented it using the https://connect.build protocol which can run gRPC and REST in a dual stack on one server.
+
+> For the implementation version with this protocol I saved it in the connect-go-examples branch
+
+## Buf Schema Registry
+
+The remote repository can reduce the size of the build artifact; in essence, the `gen/`and `client/genLocal folders` will be published to the Buf Registry repository, and the .proto file will automatically be there; interestingly, you can also write your service documentation with markdown files.
+
+![Figure: Buf Schema Registry](https://ik.imagekit.io/zq4s7yjq3/blog/image/0_JtKhujLm6E_AsoOG.png?tr=fo-center,f-webp,q-50,c-maintain-rati){ loading="lazy" format="webp" class="w-full h-auto object-cover  shadow-m figure" width="1080" height="720"}
+
+Buf Schema Registry (BSR)
+
+I think it’s enough until now because this article is too long; please explore it yourself if you are interested in a more modern Buf build system, and don’t forget to try using the Connect Protocol. For the gRPC server implementation, I use an in-memory database with **map[string]any**, and on the client side of the implementation, I do an RPC call method **GetStudentDetail**.
+
+In the initial data, there is a student with the id “seed”; the initial user is automatically inserted into memory when the server starts.
+
+## Reference:
+
+* Protobuf Documentation
+* Getting Started with the Buf CLI
+* Connect Protocol How To
+* Awesome gRPC

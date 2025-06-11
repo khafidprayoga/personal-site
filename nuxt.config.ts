@@ -2,7 +2,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-05-15",
+  compatibilityDate: "2025-06-04",
   devtools: { enabled: true },
   builder: "vite",
   modules: [
@@ -15,11 +15,17 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@nuxt/test-utils",
   ],
+  fonts: {
+    provider: "google",
+  },
   ui: {
     colorMode: false,
   },
   css: ["~/assets/css/main.css"],
   vite: {
+    css: {
+      devSourcemap: true,
+    },
     plugins: [
       tailwindcss(),
       {
@@ -55,25 +61,40 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    presets: {
-      avatar: {
-        modifiers: {
-          format: "jpg",
-          width: 72,
-          height: 72,
-        },
-      },
+    imagekit: {
+      baseURL: "https://ik.imagekit.io/zq4s7yjq3",
     },
+  },
+  icon: {
+    provider: "server",
   },
   nitro: {
     preset: "cloudflare-pages",
+    compressPublicAssets: true,
   },
   content: {
     build: {
       markdown: {
         highlight: {
           theme: "github-dark-high-contrast",
-          langs: ["proto", "go", "json", "yaml", "toml", "bash", "sh", "js", "ts", "html", "css", "sql", "md", "markdown"],
+          langs: [
+            "python",
+            "proto",
+            "go",
+            "json",
+            "java",
+            "javascript",
+            "yaml",
+            "toml",
+            "bash",
+            "sh",
+            "js",
+            "ts",
+            "html",
+            "css",
+            "sql",
+            "ps1",
+          ],
         },
       },
     },

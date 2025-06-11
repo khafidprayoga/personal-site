@@ -3,6 +3,7 @@ const { appName } = useAppConfig()
 
 const { data } = await useAsyncData('blog-posts', () => {
   return queryCollection('content')
+    .where('published', '=', true)
     .order('date', 'DESC')
     .all()
 })

@@ -1,24 +1,26 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  const body = await readBody(event);
 
   const currentPostPath = body.currentPostPath;
 
   if (!currentPostPath) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Current post path is required',
-    })
+      statusMessage: "Current post path is required",
+    });
   }
 
   const posts = await queryCollectionItemSurroundings(
     event,
-    'content',
+    "content",
     currentPostPath,
     {
       before: 1,
       after: 1,
     }
-  ).order('date', 'DESC')
+  )
+    .where("published", "=", true)
+    .order("date", "DESC");
 
-  return posts
-})
+  return posts;
+});

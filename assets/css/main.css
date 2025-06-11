@@ -42,8 +42,9 @@ h6 {
 }
 
 /* for route nav active */
-a[aria-current="page"] {
-  @apply underline decoration-1 underline-offset-6;
+a[aria-current="page"],
+.nav-menu a[data-active] {
+  @apply underline decoration-1 underline-offset-6 ;
 }
 
 .prose {
@@ -75,7 +76,7 @@ a[aria-current="page"] {
   }
 
   img.figure {
-    @apply mx-auto pb-0 mb-0;
+    @apply mx-auto pb-0 mb-0 min-w-full max-w-full;
   }
 
   p:has(img.figure)+p {

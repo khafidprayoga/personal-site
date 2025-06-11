@@ -1,19 +1,19 @@
 export default defineAppConfig({
-  appHostname: "example.local",
+  appHostname: "khfd.xyz",
   appName: "Khafid Prayoga",
   appDescription:
-    "Fixed Thoughts is a daily writing about my thoughts and experiences",
+    "My daily writing about my thoughts and experiences",
   author: {
     name: "Khafid Prayoga",
     role: "Software Engineer",
   },
   pinnedAnnouncement: {
-    show: false,
+    show: true,
     message:
-      "🚧 This project is under active development and has no stable release yet.",
+      "🚧 This project is under active development and has no stable release yet. Check out the source code on GitHub.",
     link: {
-      label: "",
-      to: "https://github.com/khafidprayoga/fixed",
+      label: "Source Code",
+      to: "https://github.com/khafidprayoga/personal-site",
     },
   },
   hero: {

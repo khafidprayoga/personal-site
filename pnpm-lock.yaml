@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@iconify-json/heroicons':
+        specifier: ^1.2.2
+        version: 1.2.2
+      '@iconify-json/material-symbols':
+        specifier: ^1.2.25
+        version: 1.2.25
       '@nuxt/content':
         specifier: 3.5.1
         version: 3.5.1(magicast@0.3.5)(typescript@5.8.3)
@@ -719,6 +725,12 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/heroicons@1.2.2':
+    resolution: {integrity: sha512-qoW4pXr5kTTL6juEjgTs83OJIwpePu7q1tdtKVEdj+i0zyyVHgg/dd9grsXJQnpTpBt6/VwNjrXBvFjRsKPENg==}
+
+  '@iconify-json/material-symbols@1.2.25':
+    resolution: {integrity: sha512-WIC8rKKA5fsqt8E2ZFT6lqRGP30BK8P+SAzlqo0GzPe6mxKY+NLcRs+Tk+SnpZElgDjnb27A9zMmUajMLQGPmQ==}
 
   '@iconify-json/simple-icons@1.2.37':
     resolution: {integrity: sha512-jZwTBznpYVDYKWyAuRpepPpCiHScVrX6f8WRX8ReX6pdii99LYVHwJywKcH2excWQrWmBomC9nkxGlEKzXZ/wQ==}
@@ -6524,6 +6536,14 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@iconify-json/heroicons@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/material-symbols@1.2.25':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/simple-icons@1.2.37':
     dependencies:
