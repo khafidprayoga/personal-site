@@ -1,12 +1,17 @@
 import tailwindcss from "@tailwindcss/vite";
+import { definePerson } from "nuxt-schema-org/schema";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-06-04",
   devtools: { enabled: true },
   builder: "vite",
+  runtimeConfig: {
+    public: {
+      commitHash: process.env.COMMIT_HASH || "dev",
+    }
+  },
   modules: [
-    "@nuxt/content",
     "@nuxt/eslint",
     "@nuxt/fonts",
     "@nuxt/icon",
@@ -14,7 +19,31 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@nuxt/ui",
     "@nuxt/test-utils",
+    "@nuxtjs/sitemap",
+    "@nuxt/content",
+    "nuxt-schema-org",
   ],
+  site: {
+    url: "https://khfd.xyz",
+    name: "Khafid Prayoga",
+    description:
+      "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let's build something powerful—together.",
+  },
+  sitemap: {
+    xsl: false,
+    sources: ["/api/blog/sitemap"],
+    includeAppSources: true,
+  },
+  app: {
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
+    layoutTransition: {
+      name: "layout",
+      mode: "out-in",
+    },
+  },
   fonts: {
     provider: "google",
   },
@@ -98,5 +127,19 @@ export default defineNuxtConfig({
         },
       },
     },
+  },
+  schemaOrg: {
+    identity: definePerson({
+      name: "Khafid Prayoga",
+      image:
+        "https://ik.imagekit.io/zq4s7yjq3/profile/profile.jpg?tr=w-72,h-72,fo-center,f-webp,c-maintain-ratio",
+      description:
+        "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions.",
+      url: "khfd.xyz",
+      sameAs: [
+        "https://github.com/khafidprayoga",
+        "https://www.linkedin.com/in/khafidprayoga",
+      ],
+    }),
   },
 });

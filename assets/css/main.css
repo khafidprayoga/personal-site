@@ -68,6 +68,7 @@ a[aria-current="page"],
   }
 
   code {
+    @apply text-xs;
     font-family: var(--font-mono);
   }
 
@@ -85,4 +86,112 @@ a[aria-current="page"],
   /* You can also override other Typography properties here */
   /* --tw-prose-headings-color: #333; */
   /* --tw-prose-body-color: #555; */
+}
+
+/* Page Transitions menggunakan fitur bawaan Nuxt */
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Layout Transitions */
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.3s ease;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Content loading animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation utility classes */
+.animate-on-load {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-delay-300 {
+  animation-delay: 0.3s;
+}
+
+.animate-delay-400 {
+  animation-delay: 0.4s;
+}
+
+.animate-delay-500 {
+  animation-delay: 0.5s;
+}
+
+.animate-delay-600 {
+  animation-delay: 0.6s;
+}
+
+.animate-delay-700 {
+  animation-delay: 0.7s;
+}
+
+.animate-delay-800 {
+  animation-delay: 0.8s;
+}
+
+/* SEO & Accessibility Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable animations untuk user yang prefer reduced motion */
+  .animate-on-load,
+  .page-enter-active,
+  .page-leave-active,
+  .layout-enter-active,
+  .layout-leave-active {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Ensure content is visible for search engines and screen readers */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-load {
+    opacity: 1;
+  }
+}
+
+/* Performance optimization - hardware acceleration */
+.animate-on-load,
+.page-enter-active,
+.page-leave-active {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation to save memory */
+.animate-on-load.animation-complete {
+  will-change: auto;
 }

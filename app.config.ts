@@ -10,7 +10,7 @@ export default defineAppConfig({
   pinnedAnnouncement: {
     show: true,
     message:
-      "🚧 This project is under active development and has no stable release yet. Check out the source code on GitHub.",
+      "🚧 This project is under active development and has no stable release yet.",
     link: {
       label: "Source Code",
       to: "https://github.com/khafidprayoga/personal-site",
@@ -20,10 +20,10 @@ export default defineAppConfig({
     showPicture: true,
     title: "Hey, i am Khafid👋",
     description:
-      "A passionate Back-end Developer with 3+ years of experience building reliable, high-performance systems using Go, PostgreSQL, and cloud-native tools. From database design to API development, I help turn ideas into robust digital solutions. Let's build something powerful—together.",
+    "Experienced Back-end Developer with over 3 years of expertise in designing, developing, and maintaining scalable server-side applications. Proficient in Golang, JavaScript/TypeScript, and modern web technologies.",
     openToWork: true,
     resumeUrl:
-      "https://drive.google.com/file/d/1ophAiqRIoqsn-0BIx8TIiI1Kf5fvS-Bm/view?usp=sharing",
+      "/static/resume.pdf",
     stacks: [
       {
         name: "Go",

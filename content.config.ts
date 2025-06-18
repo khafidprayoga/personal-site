@@ -12,6 +12,7 @@ export default defineContentConfig({
         canonicalURL: z.string().optional(),
         bannerURL: z.string().optional(),
         published: z.boolean().optional(),
+        pinned: z.boolean().optional(),
       })
     }),
   }

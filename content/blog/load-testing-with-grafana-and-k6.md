@@ -3,8 +3,9 @@ title: "Load Testing with Grafana k6 and InfluxDB"
 subtitle: "As someone who works for an IT company, you get customer complaints if the application running in production needs to be faster. Maybe it’s…"
 date: 2023-02-28
 canonicalURL: "https://medium.com/@khafidprayoga/load-testing-with-grafana-k6-and-influxdb-98411e0222fe"
+bannerURL: "/blog/image/0_KYNb9RlkjmVVF3x4.png?tr=w-1280,h-720,fo-center,f-webp,q-50,c-maintain-ratio"
 published: true
-bannerURL: "https://ik.imagekit.io/zq4s7yjq3/blog/image/0_KYNb9RlkjmVVF3x4.png?tr=w-1280,h-720,fo-center,f-webp,q-50,c-maintain-ratio"
+pinned: false
 ---
 
 As someone who works for an IT company, you get customer complaints if the application running in production needs to be faster. Maybe it’s because of a new feature, for example, a massive year-end promo feature, so there is a spike in traffic on the service, or it could be a legacy code that has been stable but rarely done maintenance.

@@ -2,3 +2,6 @@ User-Agent: *
 Disallow: /
 Allow: /$
 Allow: /blog/*
+Allow: /sitemap.xml
+
+Sitemap: https://khfd.xyz/sitemap.xml

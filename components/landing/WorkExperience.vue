@@ -6,10 +6,10 @@ const { workExperience } = useAppConfig()
 <template>
   <section id="work-experience" class="mb-10 pb-5">
     <div>
-      <h2 class="text-2xl font-bold capitalize  border-b-4 border-gray-200 ">Work Experience</h2>
+      <h2 class="text-2xl font-bold capitalize border-b-4 border-gray-200 animate-on-load">Work Experience</h2>
     </div>
-    <ol  v-for="experience in workExperience.history" :key="experience.role"  class="flex flex-col gap-5 my-3 " >
-      <li class="flex flex-col gap-1">
+    <ol v-for="(experience, index) in workExperience.history" :key="experience.role" class="flex flex-col gap-5 my-3">
+      <li class="flex flex-col gap-1 animate-on-load" :class="`animate-delay-${(index + 1) * 100}`">
           <h3 class="text-md font-bold">{{ experience.role }}</h3>
           <UButton
            class="text-sm text-gray-600 font-medium underline" 

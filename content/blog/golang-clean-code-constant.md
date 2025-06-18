@@ -3,8 +3,9 @@ title: "Golang Clean Code: Constant"
 subtitle: "Constant is a very useful feature in the Golang programming language, and IOTA is very powerful but not popular."
 date: 2023-01-29
 canonicalURL: "https://medium.com/@khafidprayoga/golang-clean-code-constant-and-iota-94ced892a6da"
-bannerURL: "https://ik.imagekit.io/zq4s7yjq3/blog/image/1_1PA7I3A4LitOlCG-yMWf5g.png?tr=w-1280,h-720,fo-center,f-webp,q-50,c-maintain-ratio"
+bannerURL: "/blog/image/1_1PA7I3A4LitOlCG-yMWf5g.png?tr=w-1280,h-720,fo-center,f-webp,q-50,c-maintain-ratio"
 published: true
+pinned: true
 ---
 
 *const* is a keyword used to initialize a variable with an immutable value. They are compile-time constants rather than runtime variables. IOTA is powerful but not very popular!

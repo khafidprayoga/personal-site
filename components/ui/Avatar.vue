@@ -27,6 +27,8 @@ const loadingBehavior = computed(() => {
     <div class="mx-auto w-fit rounded-full p-1 bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 shadow-lg hover:shadow-xl hover:shadow-pink-500/25 transition-all duration-300 hover:scale-105 animate-spin-slow">
     <NuxtImg
       :src="avatarUrl" :alt="authorName + ' Avatar'" class="rounded-full border-3 border-white"
-      :width="props.avatarSize" :height="props.avatarSize" preload :loading="loadingBehavior"/>
+      :width="props.avatarSize" :height="props.avatarSize"  :loading="loadingBehavior"
+      :fetchpriority="props.forHero ? 'high' : 'auto'"
+      />
   </div>
 </template>

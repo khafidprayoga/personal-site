@@ -1,0 +1,11 @@
+version: '3'
+tasks:
+  build:
+    desc: Build Nuxt project with commit hash injected
+    dir: '{{.USER_WORKING_DIR}}'
+    env:
+      COMMIT_HASH:
+        sh: git rev-parse --short HEAD
+    cmds:
+      - 'echo "Using produciton build with commit hash: $COMMIT_HASH"'
+      - 'COMMIT_HASH=$COMMIT_HASH npm run build'

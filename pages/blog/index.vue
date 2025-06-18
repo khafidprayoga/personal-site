@@ -31,23 +31,57 @@ const articles = computed(() => {
 })
 
 useHead({
-  title: `${appName} / Blog Posts`
+  title: `${appName} / Blog Posts`,
+  meta: [
+    {
+      name: 'description',
+      content: 'Latest and most popular blog articles collection'
+    },
+    {
+      name: 'keywords',
+      content: 'blog, articles, news, tutorials'
+    },
+    {
+      property: 'og:title',
+      content: `${appName} / Blog Posts`
+    },
+    {
+      property: 'og:description',
+      content: 'Latest and most popular blog articles collection'
+    },
+    {
+      property: 'og:type',
+      content: 'website'
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary'
+    },
+    {
+      name: 'twitter:title',
+      content: `${appName} / Blog Posts`
+    },
+    {
+      name: 'twitter:description',
+      content: 'Latest and most popular blog articles collection'
+    }
+  ]
 })
 
 </script>
 <template>
   <UContainer>
-    <h1 class="text-xl font-bold">
+    <h1 class="text-xl font-bold animate-on-load">
       Blog Posts
     </h1>
 
     <div class="flex flex-col">
       <template v-for="(item, index) in articles" :key="index">
-        <h2 v-if="index === 0 || item.year !== articles[index - 1].year" class="mt-3 text-lg font-bold">
+        <h2 v-if="index === 0 || item.year !== articles[index - 1].year" class="mt-3 text-lg font-bold animate-on-load animate-delay-100">
           {{ item.year }}:
         </h2>
         <ol class="flex flex-col">
-          <li class="mt-3" :key="item.id">
+          <li class="mt-3 animate-on-load" :class="`animate-delay-${Math.min((index + 2) * 100, 800)}`" :key="item.id">
             <h2 class="text-md font-bold">
               {{ item.title }}
             </h2>
